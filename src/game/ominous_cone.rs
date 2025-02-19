@@ -18,6 +18,11 @@ impl Plugin for OminousConePlugin {
 
 
 
+#[derive(Component)]
+pub struct OminousCone;
+
+
+
 /// Spawns the O M I N O U S  C O N E
 fn setup(
     mut commands: Commands,
@@ -26,6 +31,7 @@ fn setup(
 ) {
     // SPAWN IT
     commands.spawn((
+            OminousCone,
             PointLight {
                 color: Color::from(RED),
                 shadows_enabled: true,

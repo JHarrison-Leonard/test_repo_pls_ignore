@@ -77,6 +77,8 @@ fn go_to_target(
     mut guys: Query<(&mut LittleGuy, &mut ExternalForce, &GlobalTransform), (With<LittleGuy>, Without<OminousCone>)>,
     targets: Query<&GlobalTransform, (With<OminousCone>, Without<LittleGuy>)>,
 ) {
+    const NOT_GO_FAST_MULTIPLIER: f32 = 0.01;
+
     for (mut guy, mut force, guy_transform) in &mut guys {
         if guy.going {
             // Find closest cone
@@ -88,7 +90,7 @@ fn go_to_target(
             }
 
             // Apply force
-            force.apply_force(guy.target);
+            force.apply_force(guy.target * NOT_GO_FAST_MULTIPLIER);
         }
     }
 }

@@ -45,25 +45,7 @@ fn setup(
             Collider::cylinder(20.0, 1.0),
     ));
 
-    // Spawn fire
-    commands.spawn((
-            PointLight {
-                color: Color::from(RED),
-                shadows_enabled: true,
-                intensity: 100_000.,
-                range: 100.0,
-                shadow_depth_bias: 0.2,
-                ..default()
-            },
-            Mesh3d(meshes.add(Cone::default())),
-            MeshMaterial3d(materials.add(Color::from(RED))),
-            Transform::from_xyz(0.0, 5.0, 0.0),
-            RigidBody::Dynamic,
-            Collider::cone(0.5, 1.0),
-            ColliderDensity(1.0),
-    ));
-
-    // Spawn light
+    // Spawn point light
     commands.spawn((
             PointLight {
                 shadows_enabled: true,

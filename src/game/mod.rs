@@ -8,7 +8,9 @@ use bevy::{
     prelude::*,
 };
 
-//mod ominous_cone;
+use ominous_cone::OminousConePlugin;
+
+mod ominous_cone;
 //mod little_guy;
 
 
@@ -17,8 +19,10 @@ pub struct GamePlugin;
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins(PhysicsPlugins::default())
-//            .add_plugin(OminousConePlugin)
+        app.add_plugins((
+                PhysicsPlugins::default(),
+                OminousConePlugin,
+        ))
 //            .add_plugin(LittleGuyPlugin)
             .add_systems(Startup, setup)
             .add_systems(Startup, disable_ambient_lighting);

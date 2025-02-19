@@ -4,14 +4,15 @@
 
 use avian3d::prelude::*;
 use bevy::{
-    color::palettes::basic::*,
+    color::palettes::basic::WHITE,
     prelude::*,
 };
 
 use ominous_cone::OminousConePlugin;
+use little_guy::LittleGuyPlugin;
 
 mod ominous_cone;
-//mod little_guy;
+mod little_guy;
 
 
 
@@ -22,8 +23,8 @@ impl Plugin for GamePlugin {
         app.add_plugins((
                 PhysicsPlugins::default(),
                 OminousConePlugin,
+                LittleGuyPlugin,
         ))
-//            .add_plugin(LittleGuyPlugin)
             .add_systems(Startup, setup)
             .add_systems(Startup, disable_ambient_lighting);
     }
@@ -45,7 +46,7 @@ fn setup(
             Collider::cylinder(20.0, 1.0),
     ));
 
-    // Spawn point light
+    // Spawn light
     commands.spawn((
             PointLight {
                 shadows_enabled: true,

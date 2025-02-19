@@ -15,7 +15,8 @@ pub struct LittleGuyPlugin;
 impl Plugin for LittleGuyPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Startup, setup)
-            .add_systems(Update, (get_going, go_to_target));
+            .add_systems(Update, get_going)
+            .add_systems(FixedUpdate, go_to_target);
     }
 }
 
@@ -74,12 +75,13 @@ fn get_going(
 
 
 fn go_to_target(
-    mut guys: Query<(&mut LittleGuy, &mut ExternalForce, &GlobalTransform), (With<LittleGuy>, Without<OminousCone>)>,
+    mut guys: Query<(&mut LittleGuy, &mut ExternalForce, &GlobalTransform, &mut LinearVelocity), (With<LittleGuy>, Without<OminousCone>)>,
     targets: Query<&GlobalTransform, (With<OminousCone>, Without<LittleGuy>)>,
 ) {
     const NOT_GO_FAST_MULTIPLIER: f32 = 0.01;
+    const CLOSE_ENOUGH: f32 = 2.0;
 
-    for (mut guy, mut force, guy_transform) in &mut guys {
+    for (mut guy, mut force, guy_transform, mut velocity) in &mut guys {
         if guy.going {
             // Find closest cone
             for target_transform in &targets {
@@ -89,8 +91,16 @@ fn go_to_target(
                 }
             }
 
-            // Apply force
-            force.apply_force(guy.target * NOT_GO_FAST_MULTIPLIER);
+            // If close enough, chill
+            if guy.target.length() <= CLOSE_ENOUGH {
+                guy.going = false;
+                force.clear();
+                *velocity = LinearVelocity::ZERO;
+            }
+            else {
+                // Apply force
+                force.apply_force(guy.target * NOT_GO_FAST_MULTIPLIER);
+            }
         }
     }
 }

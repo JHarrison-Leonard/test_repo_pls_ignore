@@ -42,7 +42,7 @@ fn setup(
     ));
 
     // Spawn fire
-    commands.spawn(
+    commands.spawn((
             PointLight {
                 color: Color::from(RED),
                 shadows_enabled: true,

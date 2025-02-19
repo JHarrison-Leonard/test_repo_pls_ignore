@@ -31,5 +31,8 @@ fn setup(
         Collider::capsule(0.2, 0.5),
         ColliderDensity(1.0),
         Transform::from_xyz(5.0, 5.0, 5.0),
+        LockedAxes::new()
+            .lock_rotation_x()
+            .lock_rotation_z(),
     ));
 }

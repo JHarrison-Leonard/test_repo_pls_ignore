@@ -161,6 +161,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.97"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dcfed56ad506cb2c684a14971b8861fdc3baaaae314b9e5f9bb532cbe3ba7a4f"
+
+[[package]]
 name = "approx"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -868,6 +874,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_panorbit_camera"
+version = "0.23.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4e22224619230504b7a439ba05df41e4e364b848e1cf336c60bb9e44fd38c273"
+dependencies = [
+ "bevy",
+]
+
+[[package]]
 name = "bevy_pbr"
 version = "0.15.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1038,6 +1053,15 @@ dependencies = [
  "derive_more",
  "serde",
  "uuid",
+]
+
+[[package]]
+name = "bevy_spectator"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e3b0ffefe03dd857103aa3481462d100ebf837f7590c924e27d617dab4624060"
+dependencies = [
+ "bevy",
 ]
 
 [[package]]
@@ -1232,6 +1256,16 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "bevy_water"
+version = "0.15.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "84756fca61bdce53b142e7b1e702487a593727ba9580bfae7e6e9c63b291512e"
+dependencies = [
+ "anyhow",
+ "bevy",
 ]
 
 [[package]]
@@ -2393,6 +2427,8 @@ dependencies = [
  "byteorder-lite",
  "num-traits",
  "png",
+ "zune-core",
+ "zune-jpeg",
 ]
 
 [[package]]
@@ -4050,6 +4086,9 @@ version = "0.1.0"
 dependencies = [
  "avian3d",
  "bevy",
+ "bevy_panorbit_camera",
+ "bevy_spectator",
+ "bevy_water",
 ]
 
 [[package]]
@@ -5196,4 +5235,19 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "zune-core"
+version = "0.4.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3f423a2c17029964870cfaabb1f13dfab7d092a62a29a89264f4d36990ca414a"
+
+[[package]]
+name = "zune-jpeg"
+version = "0.4.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "99a5bab8d7dedf81405c4bb1f2b83ea057643d9cb28778cea9eecddeedd2e028"
+dependencies = [
+ "zune-core",
 ]

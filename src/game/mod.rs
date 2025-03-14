@@ -31,7 +31,7 @@ impl Plugin for GamePlugin {
                 PanOrbitCameraPlugin,
         ))
             .insert_resource(WaterSettings {
-                height: 0.0,
+                height: -1.0,
                 ..default()
             })
             .add_plugins((WaterPlugin, ImageUtilsPlugin))
@@ -51,10 +51,10 @@ fn setup(
 ) {
     // Spawn ground plane
     commands.spawn((
-            Mesh3d(meshes.add(Cylinder::new(20.0, 1.0))),
+            Mesh3d(meshes.add(Cylinder::new(20.0, 2.0))),
             MeshMaterial3d(materials.add(Color::from(WHITE))),
             RigidBody::Static,
-            Collider::cylinder(20.0, 1.0),
+            Collider::cylinder(20.0, 2.0),
     ));
 
     // Spawn light
@@ -83,15 +83,6 @@ fn make_camera<'a>(commands: &'a mut Commands) -> EntityCommands<'a> {
     let mut cam = commands.spawn((
             Camera3d::default(),
             Transform::from_xyz(0.0, 8.0, 16.0).looking_at(Vec3::new(0., 0., 0.), Vec3::Y),
-            DistanceFog {
-                color: Color::srgba(0.1, 0.2, 0.4, 1.0),
-                falloff: FogFalloff::from_visibility_colors(
-                    400.0,
-                    Color::srgb(0.35, 0.5, 0.66),
-                    Color::srgb(0.8, 0.844, 1.0),
-                ),
-                ..default()
-            },
     ));
 
     cam.insert(Spectator);

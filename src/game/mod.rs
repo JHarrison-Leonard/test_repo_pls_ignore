@@ -5,6 +5,7 @@
 use avian3d::prelude::*;
 use bevy::{
     color::palettes::basic::WHITE,
+    color::palettes::css::BROWN,
     prelude::*,
 };
 use bevy_panorbit_camera::*;
@@ -57,27 +58,36 @@ fn setup(
             Collider::cylinder(20.0, 2.0),
     ));
 
-    // Spawn light
+    // Spawn lamp post
+    commands.spawn((
+            Mesh3d(meshes.add(Cylinder::new(0.1, 5.0))),
+            MeshMaterial3d(materials.add(Color::from(BROWN))),
+            RigidBody::Static,
+            Collider::cylinder(0.1, 5.0),
+            Transform::from_xyz(-10.0, 3.5, -10.0),
+    ));
     commands.spawn((
             PointLight {
-                shadows_enabled: true,
-                intensity: 100_000.,
+                shadows_enabled:true,
+                intensity: 1_000_000.,
                 range: 100.0,
                 shadow_depth_bias: 0.2,
                 ..default()
             },
-            Transform::from_xyz(8.0, 16.0, 8.0),
+            Transform::from_xyz(-11.2, 6.0, -11.0),
     ));
 }
 
 
 
+/// Sets up camera in scene
 fn setup_camera(mut commands: Commands) {
     make_camera(&mut commands);
 }
 
 
 
+/// Spawns camera with basic controls
 fn make_camera<'a>(commands: &'a mut Commands) -> EntityCommands<'a> {
     // Code mostly stolen from the pirates example in bevy_water
     let mut cam = commands.spawn((
